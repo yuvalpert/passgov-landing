@@ -1,0 +1,286 @@
+PASTE_TEST_123<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PassGov — בודק דוחות ביצוע | בדיקה חשבונאית אוטומטית</title>
+<meta name="description" content="PassGov — מעלים דוח ביצוע כספי (Excel או PDF), המערכת מריצה בדיקות חשבונאיות ומחזירה דוח ממצאים מסודר למייל תוך דקות.">
+<meta property="og:title" content="PassGov — בודק דוחות ביצוע">
+<meta property="og:description" content="מעלים דוח ביצוע ומקבלים דוח ממצאים מקצועי למייל תוך דקות.">
+<meta property="og:image" content="https://static.wixstatic.com/media/e353ac_d43b4d0d9d174872b04c5807065b7394~mv2.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-950:#081426; --navy-900:#0B1F3A; --navy-800:#122C4F; --navy-700:#1B3A63;
+    --gold:#C9A227; --gold-light:#E3C566; --ink:#1C2733; --muted:#5B6B7C;
+    --line:#E4E9F0; --bg:#F7F9FC; --white:#FFFFFF; --radius:14px;
+    --shadow:0 10px 30px rgba(11,31,58,.10);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Heebo',-apple-system,'Segoe UI',sans-serif;color:var(--ink);background:var(--bg);line-height:1.65;-webkit-font-smoothing:antialiased}
+  .container{max-width:1080px;margin:0 auto;padding:0 24px}
+  header{position:sticky;top:0;z-index:50;background:rgba(8,20,38,.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(201,162,39,.25)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{display:flex;align-items:center;gap:12px;color:var(--white);font-weight:700;font-size:1.1rem;text-decoration:none}
+  .pg-mark{width:40px;height:40px;flex-shrink:0}
+  .brand-txt{display:flex;flex-direction:column;line-height:1.15}
+  .brand-txt strong{letter-spacing:.16em;font-size:1.02rem;font-weight:800}
+  .brand-txt small{font-weight:400;font-size:.72rem;color:#9FB3C8;letter-spacing:.02em}
+  .nav a.cta{background:var(--gold);color:var(--navy-950);padding:9px 22px;border-radius:999px;font-weight:600;font-size:.95rem;text-decoration:none;transition:background .2s, transform .2s}
+  .nav a.cta:hover{background:var(--gold-light);transform:translateY(-1px)}
+  .hero{background:radial-gradient(900px 420px at 85% -10%, rgba(201,162,39,.16), transparent 60%),radial-gradient(700px 380px at 8% 110%, rgba(27,58,99,.55), transparent 65%),linear-gradient(160deg,var(--navy-950) 0%,var(--navy-900) 55%,var(--navy-800) 100%);color:var(--white);padding:84px 0 96px;position:relative;overflow:hidden}
+  .hero::after{content:"";position:absolute;inset:auto 0 0 0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,162,39,.5),transparent)}
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--gold-light);font-weight:600;font-size:.85rem;letter-spacing:.06em;border:1px solid rgba(201,162,39,.4);border-radius:999px;padding:6px 16px;margin-bottom:22px;background:rgba(201,162,39,.08)}
+  .hero h1{font-size:clamp(1.9rem,4vw,2.9rem);font-weight:800;line-height:1.25;margin-bottom:18px}
+  .hero h1 em{font-style:normal;color:var(--gold-light)}
+  .hero p.lead{font-size:1.12rem;color:#C6D2E1;max-width:34rem;margin-bottom:32px;font-weight:300}
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .btn-primary{background:var(--gold);color:var(--navy-950);padding:14px 34px;border-radius:999px;font-weight:700;font-size:1.05rem;text-decoration:none;box-shadow:0 6px 20px rgba(201,162,39,.35);transition:background .2s, transform .2s, box-shadow .2s}
+  .btn-primary:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 10px 26px rgba(201,162,39,.45)}
+  .btn-ghost{color:#D8E1EC;text-decoration:none;font-weight:500;padding:14px 10px;border-bottom:1px solid transparent;transition:color .2s}
+  .btn-ghost:hover{color:var(--gold-light)}
+  .trust{display:flex;gap:26px;margin-top:40px;flex-wrap:wrap}
+  .trust div{display:flex;align-items:center;gap:9px;color:#AEBDD0;font-size:.9rem}
+  .trust svg{width:17px;height:17px;flex-shrink:0}
+  .report-card{background:linear-gradient(165deg,#FFFFFF 0%,#F2F6FB 100%);border-radius:18px;box-shadow:0 24px 60px rgba(0,0,0,.35);padding:26px;color:var(--ink);transform:rotate(-1.5deg)}
+  .report-card .rc-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+  .report-card .rc-title{font-weight:700;font-size:.95rem;color:var(--navy-900)}
+  .badge-ok{background:#E7F5EC;color:#1E7A46;font-weight:700;font-size:.78rem;padding:4px 12px;border-radius:999px}
+  .rc-row{display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px dashed var(--line);font-size:.88rem}
+  .rc-row:last-child{border-bottom:none}
+  .rc-row .lbl{color:var(--muted)}
+  .rc-row .val{font-weight:600;display:flex;align-items:center;gap:7px}
+  .dot{width:9px;height:9px;border-radius:50%;display:inline-block}
+  .dot.g{background:#2EA35E}.dot.y{background:#E2B93B}
+  .rc-foot{margin-top:14px;padding-top:14px;border-top:1px solid var(--line);font-size:.8rem;color:var(--muted);display:flex;align-items:center;gap:8px}
+  section{padding:76px 0}
+  .sec-head{text-align:center;max-width:44rem;margin:0 auto 48px}
+  .sec-head .kicker{color:var(--gold);font-weight:700;font-size:.85rem;letter-spacing:.1em;margin-bottom:10px}
+  .sec-head h2{font-size:clamp(1.5rem,3vw,2.1rem);font-weight:800;color:var(--navy-900);margin-bottom:12px}
+  .sec-head p{color:var(--muted);font-size:1.02rem}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .step{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:30px 26px;box-shadow:var(--shadow);position:relative;transition:transform .2s, box-shadow .2s}
+  .step:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(11,31,58,.14)}
+  .step .num{position:absolute;top:22px;left:22px;font-size:2.4rem;font-weight:800;color:rgba(11,31,58,.07);line-height:1}
+  .step .icon{width:52px;height:52px;border-radius:13px;margin-bottom:18px;background:linear-gradient(135deg,var(--navy-900),var(--navy-700));display:grid;place-items:center}
+  .step .icon svg{width:26px;height:26px}
+  .step h3{font-size:1.08rem;font-weight:700;color:var(--navy-900);margin-bottom:8px}
+  .step p{color:var(--muted);font-size:.93rem}
+  .checks{background:var(--navy-900);color:var(--white);position:relative;overflow:hidden}
+  .checks::before{content:"";position:absolute;inset:0;background:radial-gradient(700px 300px at 90% 0%, rgba(201,162,39,.12), transparent 60%)}
+  .checks .sec-head h2{color:var(--white)}
+  .checks .sec-head p{color:#B9C6D6}
+  .check-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;position:relative}
+  .check{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);padding:24px 20px;text-align:center;transition:border-color .2s, background .2s}
+  .check:hover{border-color:rgba(201,162,39,.5);background:rgba(255,255,255,.08)}
+  .check .ci{width:44px;height:44px;margin:0 auto 14px;border-radius:50%;background:rgba(201,162,39,.15);display:grid;place-items:center}
+  .check .ci svg{width:22px;height:22px}
+  .check h4{font-size:.98rem;font-weight:600;margin-bottom:6px}
+  .check p{font-size:.83rem;color:#A9B8CA}
+  .form-sec{background:var(--bg)}
+  .form-card{background:var(--white);border:1px solid var(--line);border-radius:20px;box-shadow:0 20px 60px rgba(11,31,58,.12);max-width:780px;margin:0 auto;overflow:hidden}
+  .form-card .fc-top{background:linear-gradient(135deg,var(--navy-950),var(--navy-800));color:var(--white);padding:26px 32px;display:flex;align-items:center;gap:14px}
+  .form-card .fc-top .fi{width:44px;height:44px;border-radius:12px;flex-shrink:0;background:linear-gradient(135deg,var(--gold),var(--gold-light));display:grid;place-items:center}
+  .form-card .fc-top .fi svg{width:24px;height:24px}
+  .form-card .fc-top h3{font-size:1.15rem;font-weight:700}
+  .form-card .fc-top p{font-size:.85rem;color:#C0CDDD;font-weight:300}
+  .form-card .fc-body{padding:10px 18px 18px}
+  .form-card iframe{width:100%;border:none;min-height:520px}
+  .form-note{text-align:center;color:var(--muted);font-size:.85rem;max-width:640px;margin:22px auto 0;display:flex;align-items:center;justify-content:center;gap:8px}
+  .form-note svg{width:16px;height:16px;flex-shrink:0}
+  footer{background:var(--navy-950);color:#8FA1B6;padding:34px 0;font-size:.88rem;border-top:1px solid rgba(201,162,39,.2)}
+  .foot{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .foot .fb{display:flex;align-items:center;gap:10px;color:#C6D2E1;font-weight:600}
+  @media(max-width:900px){
+    .hero-grid{grid-template-columns:1fr;gap:44px}
+    .report-card{max-width:440px;margin:0 auto;transform:none}
+    .steps{grid-template-columns:1fr}
+    .check-grid{grid-template-columns:repeat(2,1fr)}
+  }
+  @media(max-width:520px){
+    .check-grid{grid-template-columns:1fr}
+    .hero{padding:60px 0 70px}
+    section{padding:56px 0}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <a class="brand" href="#top">
+      <svg class="pg-mark" viewBox="0 0 48 48" aria-label="PassGov">
+        <circle cx="24" cy="24" r="20" fill="none" stroke="#8FCBF5" stroke-width="3.6"/>
+        <text x="24" y="32.5" text-anchor="middle" font-family="Heebo,Arial,sans-serif" font-size="24" font-weight="800" fill="#8FCBF5">P</text>
+      </svg>
+      <span class="brand-txt" dir="ltr"><strong>PASSGOV</strong><small dir="rtl">בודק דוחות ביצוע</small></span>
+    </a>
+    <a class="cta" href="#form">לבדיקת דוח</a>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="container hero-grid">
+    <div>
+      <span class="eyebrow"><span dir="ltr">PassGov</span> · בדיקה חשבונאית אוטומטית · תוצאה למייל</span>
+      <h1>מעלים דוח ביצוע —<br>ומקבלים <em>דוח ממצאים מקצועי</em> תוך דקות</h1>
+      <p class="lead">
+        המערכת קוראת את דוח הביצוע הכספי שלכם (Excel או PDF), מריצה עליו בדיקות
+        חשבונאיות מול נתוני התקנה והתמיכה, ושולחת אליכם למייל דוח ממצאים ברור ומסודר —
+        עוד לפני שהדוח מוגש.
+      </p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="#form">בדקו דוח עכשיו</a>
+        <a class="btn-ghost" href="#how">איך זה עובד ←</a>
+      </div>
+      <div class="trust">
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#C9A227" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          הקבצים משמשים לבדיקה בלבד
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#C9A227" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          תשובה תוך דקות
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#C9A227" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Excel ו-PDF
+        </div>
+      </div>
+    </div>
+
+    <div class="report-card" aria-hidden="true">
+      <div class="rc-head">
+        <span class="rc-title">דוח ממצאים — דוגמה</span>
+        <span class="badge-ok">הבדיקה הושלמה</span>
+      </div>
+      <div class="rc-row"><span class="lbl">הנהלה וכלליות</span><span class="val"><span class="dot g"></span>תקין</span></div>
+      <div class="rc-row"><span class="lbl">מימון עצמי</span><span class="val"><span class="dot g"></span>תקין</span></div>
+      <div class="rc-row"><span class="lbl">תמיכה ביתר</span><span class="val"><span class="dot y"></span>לתשומת לב</span></div>
+      <div class="rc-row"><span class="lbl">איזון תקציב</span><span class="val"><span class="dot g"></span>תקין</span></div>
+      <div class="rc-foot">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#5B6B7C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        הדוח המלא נשלח למייל המגיש
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="container">
+    <div class="sec-head">
+      <div class="kicker">איך זה עובד</div>
+      <h2>שלושה שלבים, בלי התקנות ובלי הרשמה</h2>
+      <p>כל התהליך אוטומטי מרגע ההעלאה ועד קבלת הדוח למייל.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <span class="num">01</span>
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#E3C566" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        </div>
+        <h3>מעלים את הדוח</h3>
+        <p>ממלאים את הטופס ומצרפים את קובץ דוח הביצוע — Excel או PDF, בדיוק כפי שהוא.</p>
+      </div>
+      <div class="step">
+        <span class="num">02</span>
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#E3C566" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+        </div>
+        <h3>המערכת בודקת</h3>
+        <p>הנתונים הכספיים מחולצים מהקובץ ונבדקים מול נתוני התקנה, מבחן התמיכה ומחזור העמותה.</p>
+      </div>
+      <div class="step">
+        <span class="num">03</span>
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#E3C566" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <h3>דוח ממצאים למייל</h3>
+        <p>תוך דקות מגיע למייל דוח מסודר: מה תקין, מה דורש תיקון, ומה כדאי לבדוק לפני ההגשה.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="checks">
+  <div class="container">
+    <div class="sec-head">
+      <div class="kicker" style="color:var(--gold-light)">מה נבדק</div>
+      <h2>הבדיקות החשבונאיות המרכזיות</h2>
+      <p>אותן בדיקות שרואה חשבון מנוסה מריץ על דוח ביצוע — באופן אוטומטי ועקבי.</p>
+    </div>
+    <div class="check-grid">
+      <div class="check">
+        <div class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="#E3C566" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="9" y1="10" x2="9" y2="20"/></svg></div>
+        <h4>הנהלה וכלליות</h4>
+        <p>עמידה בתקרת הוצאות הנהלה וכלליות ביחס למחזור</p>
+      </div>
+      <div class="check">
+        <div class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="#E3C566" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <h4>מימון עצמי</h4>
+        <p>בדיקת שיעור המימון העצמי הנדרש לפי תנאי התקנה</p>
+      </div>
+      <div class="check">
+        <div class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="#E3C566" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <h4>תמיכה ביתר</h4>
+        <p>זיהוי מצב שבו סך התמיכות עולה על המותר</p>
+      </div>
+      <div class="check">
+        <div class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="#E3C566" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M5 7l7-4 7 4"/><path d="M3 12h4l-2 5a2.5 2.5 0 0 0 4 0l-2-5"/><path d="M13 12h4l-2 5a2.5 2.5 0 0 0 4 0l-2-5"/></svg></div>
+        <h4>איזון תקציב</h4>
+        <p>התאמה בין סך ההכנסות לסך ההוצאות בדוח</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="form-sec" id="form">
+  <div class="container">
+    <div class="sec-head">
+      <div class="kicker">מתחילים</div>
+      <h2>בדקו את הדוח שלכם עכשיו</h2>
+      <p>מלאו את הפרטים, צרפו את הקובץ — והדוח בדרך אליכם.</p>
+    </div>
+    <div class="form-card">
+      <div class="fc-top">
+        <span class="fi">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#081426" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        </span>
+        <div>
+          <h3>טופס בדיקת דוח ביצוע</h3>
+          <p>ההגשה מאובטחת · התוצאה נשלחת למייל שתזינו</p>
+        </div>
+      </div>
+      <div class="fc-body">
+        <iframe data-tally-src="https://tally.so/embed/A77QJD?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+                loading="lazy" width="100%" height="520"
+                title="טופס בדיקת דוח ביצוע"></iframe>
+      </div>
+    </div>
+    <div class="form-note">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#5B6B7C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      הקבצים שמועלים משמשים לצורך הבדיקה בלבד ואינם מועברים לגורם נוסף.
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container foot">
+    <div class="fb">
+      <svg class="pg-mark" style="width:30px;height:30px" viewBox="0 0 48 48" aria-label="PassGov">
+        <circle cx="24" cy="24" r="20" fill="none" stroke="#8FCBF5" stroke-width="3.6"/>
+        <text x="24" y="32.5" text-anchor="middle" font-family="Heebo,Arial,sans-serif" font-size="24" font-weight="800" fill="#8FCBF5">P</text>
+      </svg>
+      <span dir="ltr">PASSGOV</span> · בודק דוחות ביצוע
+    </div>
+    <div>הבדיקה היא כלי עזר ואינה מחליפה ייעוץ של רואה חשבון.</div>
+  </div>
+</footer>
+
+<script async src="https://tally.so/widgets/embed.js"></script>
+</body>
+</html>
