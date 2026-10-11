@@ -96,6 +96,17 @@
   .form-card iframe{width:100%;border:none;min-height:520px}
   .form-note{text-align:center;color:var(--muted);font-size:.85rem;max-width:640px;margin:22px auto 0;display:flex;align-items:center;justify-content:center;gap:8px}
   .form-note svg{width:16px;height:16px;flex-shrink:0}
+  .examples{background:var(--navy-950);color:var(--white);padding:60px 0}
+  .examples .sec-head h2{color:var(--white)}
+  .examples .sec-head p{color:#B9C6D6}
+  .examples-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px;margin:40px 0}
+  .example-item{text-align:center}
+  .example-item .ex-icon{width:60px;height:60px;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;border-radius:12px;background:rgba(227,197,102,.1)}
+  .example-item .ex-icon svg{width:32px;height:32px}
+  .example-item h4{font-size:1.1rem;font-weight:600;margin-bottom:12px;color:var(--gold-light)}
+  .example-item p{font-size:.95rem;color:rgba(255,255,255,.8);line-height:1.5}
+  .examples-cta{text-align:center;margin-top:40px;font-size:.95rem;color:rgba(255,255,255,.9)}
+  .examples-cta strong{color:var(--gold-light);font-weight:600}
   footer{background:var(--navy-950);color:#8FA1B6;padding:34px 0;font-size:.88rem;border-top:1px solid rgba(201,162,39,.2)}
   .foot{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
   .foot .fb{display:flex;align-items:center;gap:10px;color:#C6D2E1;font-weight:600}
@@ -241,6 +252,57 @@
     </div>
   </div>
 </section>
+
+  <section class="examples">
+    <div class="container">
+      <div class="sec-head">
+        <div class="kicker" style="color:var(--gold-light)">דוגמאות נוספות</div>
+        <h2>הבודק הוא דוגמה אחת. יש עוד.</h2>
+        <p>בניתי את הבודק כי הייתי צריך אותו בעמותה שלי. באותה דרך בניתי עוד כמה דברים — כולם התחילו מבעיה אמיתית ולא מרעיון:</p>
+      </div>
+      <div class="examples-grid">
+        <div class="example-item">
+          <div class="ex-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#E3C566" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 11l3 3L22 4"></path>
+              <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+            </svg>
+          </div>
+          <h4>הכנה לביקורת עומק</h4>
+          <p>איסוף החומרים, איתור הפערים וסידור התיק מראש — במקום לרוץ אחרי מסמכים כשהמבקר כבר בדלת.</p>
+        </div>
+        <div class="example-item">
+          <div class="ex-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#E3C566" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+          </div>
+          <h4>מיילים שמדברים עם המערכות</h4>
+          <p>מסמך שנכנס במייל מגיע למקום הנכון, והבקשות החוזרות של רואה החשבון והרשויות מקבלות מענה בלי לחפש כל פעם מחדש.</p>
+        </div>
+        <div class="example-item">
+          <div class="ex-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#E3C566" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+            </svg>
+          </div>
+          <h4>שלוש שנים של מסמכי עמותה מסודרות</h4>
+          <p>אישורים, חוזים, פרוטוקולים וחשבוניות — נגישים בחיפוש אחד בדרייב.</p>
+        </div>
+        <div class="example-item">
+          <div class="ex-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#E3C566" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+          </div>
+          <h4>וואטסאפ שלא נעלם</h4>
+          <p>מה שסוכם בהתכתבות נשמר וניתן לאחזור, במקום להיעלם בין הקבוצות.</p>
+        </div>
+      </div>
+      <p class="examples-cta">אם משהו מזה מהדהד אצלכם — <strong>דברו איתי</strong>.</p>
+    </div>
+  </section>
 
 <section class="form-sec" id="form">
   <div class="container">
